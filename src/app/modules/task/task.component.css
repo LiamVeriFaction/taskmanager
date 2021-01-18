@@ -1,0 +1,15 @@
+.task-card{
+  max-width: 500px;
+  background-color: blueviolet;
+  margin: 15px;
+
+}
+
+.mat-card-title{
+  color: aliceblue;
+  text-align:left;
+  font-size: 22px;
+}
+
+
+
