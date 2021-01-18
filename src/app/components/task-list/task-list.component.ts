@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ITask } from '../../models/task.model';
 import { ITaskList } from '../../models/task-list.model';
+import {  CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { TaskListService } from 'src/app/services/task-list.service';
 
 @Component({
   selector: 'task-list',
@@ -12,9 +14,18 @@ export class TaskListComponent implements OnInit {
   @Input()tasks! : ITask[];
   @Input()tasklist! : ITaskList;
 
-  constructor() { }
+  constructor(private taskListService : TaskListService) { }
 
   ngOnInit(): void {
+  }
+
+  drop(event: CdkDragDrop<ITask[]>){
+    console.log('Previous ' + event.previousContainer.id + '  Current '  + event.container.id);
+    console.log(event.item)
+  }
+
+  getIDs(): string[] {
+    return this.taskListService.getIDS();
   }
 
 }

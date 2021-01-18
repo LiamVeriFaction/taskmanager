@@ -1,3 +1,4 @@
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { TaskListService } from 'src/app/services/task-list.service';
 import { TaskService } from 'src/app/services/task.service';
@@ -19,6 +20,13 @@ export class TaskPageComponent implements OnInit {
   ngOnInit(): void {
     this.tasks = this.taskService.getTasks()
     this.tasklists = this.tasklistservice.getTaskLists();
+  }
+
+
+  filterTasks(taskList : ITaskList) : ITask[]{
+    return this.tasks.filter((task) => {
+      return task.status === taskList.tag
+    })
   }
 
 }

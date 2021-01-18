@@ -1,6 +1,14 @@
-<div class="list">
-  <h1>{{tasklist.title}}</h1>
-  <div *ngFor ="let task of tasks">
-    <task [task] ="task" *ngIf ="tasklist.tag === task.status"></task>
+<div cdkDropListGroup class="list">
+  <h1>{{ tasklist.title }}</h1>
+  <div
+    cdkDropList
+    id = {{tasklist.id}}
+    (cdkDropListDropped)="drop($event)"
+    [cdkDropListData]="tasks"
+    [cdkDropListConnectedTo]="getIDs()"
+  >
+    <div *ngFor="let task of tasks" cdkDrag >
+      <task [task]="task" *ngIf="tasklist.tag === task.status"></task>
+    </div>
   </div>
 </div>
