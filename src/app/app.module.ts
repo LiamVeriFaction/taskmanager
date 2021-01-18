@@ -4,9 +4,9 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TaskComponent } from './modules/task/task.component';
-import { TaskListComponent } from './modules/task-list/task-list.component';
-import { TaskPageComponent } from './modules/task-page/task-page.component';
+import { TaskComponent } from './components/task/task.component';
+import { TaskListComponent } from './components/task-list/task-list.component';
+import { TaskPageComponent } from './components/task-page/task-page.component';
 import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
