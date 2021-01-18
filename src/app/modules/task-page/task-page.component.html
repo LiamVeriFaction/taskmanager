@@ -1,22 +1,7 @@
 <div class="container">
-  <h1>Tasks</h1>
-
   <div class="list-container">
-
-    <div class="todo-container column-container">
-      <div class="list">
-        <h2>Tech to learn</h2>
-        <task-list [tasks]="tasks"></task-list>
-
-      </div>
+    <div class="column-container" *ngFor="let tasklist of tasklists">
+          <task-list [tasks]="tasks" [tasklist]="tasklist"></task-list>
     </div>
-
-    <div class="done-container column-container">
-      <div class="list">
-        <h2>Tech learned</h2>
-        <task-list [tasks]="tasks"></task-list>
-      </div>
-    </div>
-
   </div>
 </div>
