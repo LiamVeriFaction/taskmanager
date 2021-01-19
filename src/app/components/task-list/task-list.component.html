@@ -4,11 +4,11 @@
     cdkDropList
     id = {{tasklist.id}}
     (cdkDropListDropped)="drop($event)"
-    [cdkDropListData]="tasks"
+    [cdkDropListData]="tasklist.tasks"
     [cdkDropListConnectedTo]="getIDs()"
   >
-    <div *ngFor="let task of tasks">
-      <task [task]="task" *ngIf="tasklist.tag === task.status" cdkDrag></task>
+    <div *ngFor="let task of tasklist.tasks">
+      <task [task]="task" cdkDrag></task>
     </div>
   </div>
 </div>

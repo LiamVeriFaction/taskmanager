@@ -8,33 +8,39 @@ import { ITask } from '../../models/task.model';
 @Component({
   selector: 'task-page',
   templateUrl: './task-page.component.html',
-  styleUrls: ['./task-page.component.css']
+  styleUrls: ['./task-page.component.css'],
 })
 export class TaskPageComponent implements OnInit {
+  tasklists!: ITaskList[];
 
-  tasks! : ITask[];
-  tasklists! : ITaskList[];
-
-  constructor(private taskService : TaskService, private tasklistservice : TaskListService) { }
+  constructor(private tasklistservice: TaskListService) {}
 
   ngOnInit(): void {
-    this.tasks = this.taskService.getTasks()
     this.tasklists = this.tasklistservice.getTaskLists();
   }
 
+  taskMove(event: CdkDragDrop<ITask[]>) {
+    if (event.container === event.previousContainer) {
+      console.log(
+        'Inner move: From: ' +
+          event.previousIndex +
+          ' To: ' +
+          event.currentIndex
+      );
 
-  filterTasks(taskList : ITaskList) : ITask[]{
-    return this.tasks.filter((task) => {
-      return task.status === taskList.tag
-    })
+      this.tasklists[+event.container.id].tasks 
+      = array_move(this.tasklists[+event.container.id].tasks,
+        event.previousIndex,
+        event.currentIndex)
+
+    }
   }
-
-  taskMove(event: CdkDragDrop<ITask[]>){
-    console.log("From "+event.previousContainer.id +": " + event.previousIndex);
-    console.log("To "+event.container.id +": " + event.currentIndex);
-    this.filterTasks(this.tasklists[+event.previousContainer.id])[event.previousIndex].status=
-    this.tasklists[+event.container.id].tag
-
-  }
-
 }
+
+function array_move(arr: ITask[], oldI: number, newI: number) : ITask[] {
+  var temp = arr[oldI]
+  arr.splice(oldI,1)
+  arr.splice(newI,0,temp)
+  return arr
+}
+

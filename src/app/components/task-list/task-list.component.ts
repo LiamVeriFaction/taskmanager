@@ -14,7 +14,6 @@ import { TaskListService } from 'src/app/services/task-list.service';
   styleUrls: ['./task-list.component.css'],
 })
 export class TaskListComponent implements OnInit {
-  @Input() tasks!: ITask[];
   @Input() tasklist!: ITaskList;
   @Output() taskMove: EventEmitter<any> = new EventEmitter();
 
