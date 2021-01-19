@@ -2,14 +2,16 @@
   <h1>{{ tasklist.title }}</h1>
   <div
     cdkDropList
-    id = {{tasklist.id}}
+    id="{{ tasklist.id }}"
     (cdkDropListDropped)="drop($event)"
     [cdkDropListData]="tasklist.tasks"
     [cdkDropListConnectedTo]="getIDs()"
-    class = "dropzone"
+    class="dropzone"
   >
     <div *ngFor="let task of tasklist.tasks">
-      <task [task]="task" cdkDrag></task>
+      <div cdkDrag>
+        <task [task]="task"></task>
+      </div>
     </div>
   </div>
 </div>
