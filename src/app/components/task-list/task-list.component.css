@@ -5,3 +5,14 @@ h1{
 .dropzone{
   min-height: 300px;
 }
+
+.tasklist{
+  margin: 5px;
+  border-style: ridge;
+  border-color: grey;
+}
+
+.mat-raised-button {
+  margin: 10px;
+
+}

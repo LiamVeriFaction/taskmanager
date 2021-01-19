@@ -21,10 +21,12 @@ export class TaskListComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  //Called when task is dropped
   drop(event: CdkDragDrop<ITask[]>) {
     this.taskMove.emit(event);
   }
 
+  //Provides ID's for drop list connection
   getIDs(): string[] {
     return this.taskListService.getIDS();
   }

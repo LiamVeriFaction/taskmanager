@@ -9,6 +9,7 @@ import { TaskListComponent } from './components/task-list/task-list.component';
 import { TaskPageComponent } from './components/task-page/task-page.component';
 import {MatCardModule} from '@angular/material/card';
 import {DragDropModule} from '@angular/cdk/drag-drop'
+import {MatButton, MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop'
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCardModule,
-    DragDropModule
+    DragDropModule,
+    MatButtonModule,
     
   ],
   providers: [],
