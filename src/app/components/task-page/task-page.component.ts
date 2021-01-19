@@ -21,26 +21,36 @@ export class TaskPageComponent implements OnInit {
 
   taskMove(event: CdkDragDrop<ITask[]>) {
     if (event.container === event.previousContainer) {
-      console.log(
-        'Inner move: From: ' +
-          event.previousIndex +
-          ' To: ' +
-          event.currentIndex
+      this.tasklists[+event.container.id].tasks = innerMove(
+        this.tasklists[+event.container.id].tasks,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      //Change Tag of Task
+      this.tasklists[+event.previousContainer.id].tasks[
+        event.previousIndex
+      ].status = this.tasklists[+event.container.id].tag;
+
+      //Move Tag to new list
+      this.tasklists[+event.container.id].tasks.splice(
+        event.currentIndex,
+        0,
+        this.tasklists[+event.previousContainer.id].tasks[event.previousIndex]
       );
 
-      this.tasklists[+event.container.id].tasks 
-      = array_move(this.tasklists[+event.container.id].tasks,
+      //Delete Tag from old list
+      this.tasklists[+event.previousContainer.id].tasks.splice(
         event.previousIndex,
-        event.currentIndex)
-
+        1
+      );
     }
   }
 }
 
-function array_move(arr: ITask[], oldI: number, newI: number) : ITask[] {
-  var temp = arr[oldI]
-  arr.splice(oldI,1)
-  arr.splice(newI,0,temp)
-  return arr
+function innerMove(arr: ITask[], oldI: number, newI: number): ITask[] {
+  var temp = arr[oldI];
+  arr.splice(oldI, 1);
+  arr.splice(newI, 0, temp);
+  return arr;
 }
-
