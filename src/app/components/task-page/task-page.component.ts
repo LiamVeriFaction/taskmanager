@@ -29,4 +29,12 @@ export class TaskPageComponent implements OnInit {
     })
   }
 
+  taskMove(event: CdkDragDrop<ITask[]>){
+    console.log("From "+event.previousContainer.id +": " + event.previousIndex);
+    console.log("To "+event.container.id +": " + event.currentIndex);
+    this.filterTasks(this.tasklists[+event.previousContainer.id])[event.previousIndex].status=
+    this.tasklists[+event.container.id].tag
+
+  }
+
 }

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="list-container">
     <div class="column-container" *ngFor="let tasklist of tasklists">
-          <task-list [tasks]="filterTasks(tasklist)" [tasklist]="tasklist"></task-list>
+          <task-list [tasks]="filterTasks(tasklist)" [tasklist]="tasklist" (taskMove) = "taskMove($event)"></task-list>
     </div>
   </div>
 </div>

@@ -20,9 +20,9 @@ export class TaskListService {
 
 const TASKLIST: ITaskList[] = [
   
-  { id: 1, title: 'To Do', tag: 'todo' },
-  { id: 2, title: 'In Progess', tag: 'progress' },
-  { id: 3, title: 'Awaiting Review', tag: 'review' },
-  { id: 4, title: 'Completed', tag: 'completed' }
+  { id: 0, title: 'To Do', tag: 'todo' },
+  { id: 1, title: 'In Progess', tag: 'progress' },
+  { id: 2, title: 'Awaiting Review', tag: 'review' },
+  { id: 3, title: 'Completed', tag: 'completed' }
 
 ];

@@ -1,3 +1,7 @@
 h1{
   margin: 15px
 }
+
+.list{
+  min-height: 300px;
+}

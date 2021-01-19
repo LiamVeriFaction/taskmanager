@@ -7,8 +7,8 @@
     [cdkDropListData]="tasks"
     [cdkDropListConnectedTo]="getIDs()"
   >
-    <div *ngFor="let task of tasks" cdkDrag >
-      <task [task]="task" *ngIf="tasklist.tag === task.status"></task>
+    <div *ngFor="let task of tasks">
+      <task [task]="task" *ngIf="tasklist.tag === task.status" cdkDrag></task>
     </div>
   </div>
 </div>

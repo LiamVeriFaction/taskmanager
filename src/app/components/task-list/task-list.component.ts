@@ -1,31 +1,34 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ITask } from '../../models/task.model';
 import { ITaskList } from '../../models/task-list.model';
-import {  CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 import { TaskListService } from 'src/app/services/task-list.service';
 
 @Component({
   selector: 'task-list',
   templateUrl: './task-list.component.html',
-  styleUrls: ['./task-list.component.css']
+  styleUrls: ['./task-list.component.css'],
 })
 export class TaskListComponent implements OnInit {
+  @Input() tasks!: ITask[];
+  @Input() tasklist!: ITaskList;
+  @Output() taskMove: EventEmitter<any> = new EventEmitter();
 
-  @Input()tasks! : ITask[];
-  @Input()tasklist! : ITaskList;
+  constructor(private taskListService: TaskListService) {}
 
-  constructor(private taskListService : TaskListService) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-
-  drop(event: CdkDragDrop<ITask[]>){
-    console.log('Previous ' + event.previousContainer.id + '  Current '  + event.container.id);
-    console.log(event.item)
+  drop(event: CdkDragDrop<ITask[]>) {
+    this.taskMove.emit(event);
   }
 
   getIDs(): string[] {
     return this.taskListService.getIDS();
   }
+
 
 }
