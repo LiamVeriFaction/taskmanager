@@ -1,15 +1,32 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { concatAll, filter, first, map } from 'rxjs/operators';
 import { ITask } from '../models/task.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
+  private tasks = TASKS;
+  public tasksSubject = new BehaviorSubject<ITask[]>(this.tasks);
 
-  getTasks(tag : string): ITask[] {
-    return TASKS.filter((task) => {
-      return task.status === tag
-    })
+  constructor() {
+    this.tasks = TASKS;
+  }
+
+  getTasks(id: number): Observable<ITask[]> {
+    return this.tasksSubject
+      .asObservable()
+      .pipe(map((tasks) => tasks.filter((task) => task.listID === id)));
+  }
+
+  getTask(id: number): Observable<ITask>{
+    return this.tasksSubject.asObservable().pipe(
+      concatAll(),
+      first((task) => {
+        return task.id === id;
+      })
+    );
   }
 }
 
@@ -18,54 +35,54 @@ const TASKS: ITask[] = [
     id: 0,
     title: 'Grab Bread',
     description: 'Pull 2 slices of bread out of draw',
-    status: 'completed',
+    listID: 3,
   },
   {
     id: 1,
     title: 'Grab Peanut Butter',
     description: 'Preferably Black Cat',
-    status: 'review',
+    listID: 2,
   },
   {
     id: 2,
     title: 'Grab Jam',
     description: 'Strawberry or nothing!',
-    status: 'review',
+    listID: 2,
   },
   {
     id: 3,
     title: 'Grab Knife',
     description: 'A butterknife will do',
-    status: 'completed',
+    listID: 3,
   },
   {
     id: 4,
     title: 'Apply Peanut Butter to Bread',
     description: 'Spread corner to corner',
-    status: 'progress',
+    listID: 1,
   },
   {
     id: 5,
     title: 'Apply Jam to Bread',
     description: 'Spread corner to corner',
-    status: 'progress',
+    listID: 1,
   },
   {
     id: 6,
     title: 'Put pieces of bread together',
     description: 'Watch for spillage',
-    status: 'todo',
+    listID: 0,
   },
   {
     id: 7,
     title: 'Cut diagonally',
     description: 'Who even cuts into squares?',
-    status: 'todo',
+    listID: 0,
   },
   {
     id: 8,
     title: 'Eat sandwich',
     description: 'Yum!',
-    status: 'todo',
+    listID: 0,
   },
 ];

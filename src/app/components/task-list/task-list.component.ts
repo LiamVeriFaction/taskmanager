@@ -7,6 +7,8 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { TaskListService } from 'src/app/services/task-list.service';
+import { Observable } from 'rxjs';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'task-list',
@@ -14,12 +16,22 @@ import { TaskListService } from 'src/app/services/task-list.service';
   styleUrls: ['./task-list.component.css'],
 })
 export class TaskListComponent implements OnInit {
-  @Input() tasklist!: ITaskList;
+  
+  @Input() id! : number;
+  taskList$! : Observable<ITaskList>;
+  tasks$! : Observable<ITask[]>;
+  listIDS! : string[];
+
   @Output() taskMove: EventEmitter<any> = new EventEmitter();
 
-  constructor(private taskListService: TaskListService) {}
+  constructor(private taskListService : TaskListService, private taskService : TaskService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    this.taskList$ = this.taskListService.getTaskList(this.id);
+    this.tasks$ = this.taskService.getTasks(this.id);
+    this.taskListService.getIDs().subscribe(ids => this.listIDS = ids);
+  }
 
   //Called when task is dropped
   drop(event: CdkDragDrop<ITask[]>) {
@@ -27,9 +39,6 @@ export class TaskListComponent implements OnInit {
   }
 
   //Provides ID's for drop list connection
-  getIDs(): string[] {
-    return this.taskListService.getIDS();
-  }
 
 
 }

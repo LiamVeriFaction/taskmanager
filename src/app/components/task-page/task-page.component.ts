@@ -1,5 +1,6 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { TaskListService } from 'src/app/services/task-list.service';
 import { TaskService } from 'src/app/services/task.service';
 import { ITaskList } from '../../models/task-list.model';
@@ -11,15 +12,22 @@ import { ITask } from '../../models/task.model';
   styleUrls: ['./task-page.component.css'],
 })
 export class TaskPageComponent implements OnInit {
-  tasklists!: ITaskList[];
+  
+  taskLists$! : Observable<ITaskList[]>;
 
-  constructor(private tasklistservice: TaskListService) {}
+  constructor(private taskListService: TaskListService) {}
 
   ngOnInit(): void {
-    this.tasklists = this.tasklistservice.getTaskLists();
+    this.taskLists$ = this.taskListService.getTaskLists();
   }
 
-  taskMove(event: CdkDragDrop<ITask[]>) {
+  taskMove(event: CdkDragDrop<ITask[]>){
+    console.log("From Container: " +event.previousContainer.id + " Index: " + event.previousIndex);
+    console.log("To Container: " +event.container.id + " Index: " + event.currentIndex);
+  }
+
+
+/*   taskMove(event: CdkDragDrop<ITask[]>) {
     if (event.container === event.previousContainer) {
       this.tasklists[+event.container.id].tasks = innerMove(
         this.tasklists[+event.container.id].tasks,
@@ -45,7 +53,7 @@ export class TaskPageComponent implements OnInit {
         1
       );
     }
-  }
+  } */
 }
 
 function innerMove(arr: ITask[], oldI: number, newI: number): ITask[] {
