@@ -1,6 +1,5 @@
 <div cdkDropListGroup class="tasklist" *ngIf="taskList$ | async as taskList">
   <h1>{{ taskList.title }}</h1>
-  <div *ngIf="tasks$ | async as tasks">
     <div
       cdkDropList
       id="{{ taskList.id }}"
@@ -16,4 +15,3 @@
       </div>
     </div>
   </div>
-</div>

@@ -28,6 +28,12 @@ export class TaskService {
       })
     );
   }
+
+  reassignTask(id:number, newList:number){
+    this.tasks[id].listID = newList;
+    this.tasksSubject.next(this.tasks);
+  }
+
 }
 
 const TASKS: ITask[] = [

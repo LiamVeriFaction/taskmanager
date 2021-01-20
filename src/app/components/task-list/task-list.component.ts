@@ -19,7 +19,6 @@ export class TaskListComponent implements OnInit {
   
   @Input() id! : number;
   taskList$! : Observable<ITaskList>;
-  tasks$! : Observable<ITask[]>;
   listIDS! : string[];
 
   @Output() taskMove: EventEmitter<any> = new EventEmitter();
@@ -29,16 +28,13 @@ export class TaskListComponent implements OnInit {
   ngOnInit(): void {
 
     this.taskList$ = this.taskListService.getTaskList(this.id);
-    this.tasks$ = this.taskService.getTasks(this.id);
     this.taskListService.getIDs().subscribe(ids => this.listIDS = ids);
   }
 
   //Called when task is dropped
-  drop(event: CdkDragDrop<ITask[]>) {
+  drop(event: CdkDragDrop<number[]>) {
     this.taskMove.emit(event);
   }
-
-  //Provides ID's for drop list connection
 
 
 }

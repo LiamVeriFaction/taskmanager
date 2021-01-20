@@ -37,7 +37,28 @@ export class TaskListService {
       )
     );
   }
+
+  public innerMove(id: number, prevIndex: number, newIndex :number){
+    this.taskList[id].tasks = innerMove(this.taskList[id].tasks,prevIndex,newIndex);
+    this.taskListSubject.next(this.taskList);
+  }
+
+  public outerMove(id:number, prevList: number, newList:number, prevIndex :number, newIndex : number ){
+    this.taskList[prevList].tasks.splice(prevIndex,1);
+    this.taskList[newList].tasks.splice(newIndex,0,id);
+
+    this.taskListSubject.next(this.taskList);
+
+  }
 }
+
+function innerMove(arr: number[], oldI: number, newI: number): number[] {
+  var temp = arr[oldI];
+  arr.splice(oldI, 1);
+  arr.splice(newI, 0, temp);
+  return arr;
+}
+
 
 const TASKLIST: ITaskList[] = [
   { id: 0, title: 'To Do', tag: 'todo', tasks: [6, 7, 8] },

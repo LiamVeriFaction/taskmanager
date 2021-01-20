@@ -1,7 +1,7 @@
 <div class="container">
   <div class="list-container">
-    <div class="column-container" *ngFor="let taskList of taskLists$ | async">
-          <task-list [id] = "taskList.id" (taskMove) = "taskMove($event)" ></task-list>
+    <div class="column-container" *ngFor="let taskList of taskLists$ | async" >
+          <task-list [id] = "taskList.id" (taskMove) = "taskMove($event)"></task-list>
     </div>
   </div>
 </div>
