@@ -1,8 +1,20 @@
-<div class="container">
-  <div class="list-container">
-    <div class="column-container" *ngFor="let taskList of taskLists$ | async" >
-          <task-list [id] = "taskList.id" (taskMove) = "taskMove($event)"></task-list>
+<div *ngIf="taskLists$ | async as taskLists">
+  <div *ngIf ="listOrder$ | async as listOrder">
+  <div
+    cdkDropList
+    cdkDropListOrientation="horizontal"
+    (cdkDropListDropped)="drop($event, listOrder)"
+    class ="taskLists"
+  >
+    <div
+      *ngFor="let listItem of listOrder"
+      cdkDrag
+      class= "taskList"
+    >
+      <div>
+        <task-list [id]="listItem" (taskMove)="taskMove($event)"></task-list>
+      </div>
     </div>
   </div>
 </div>
-
+</div>

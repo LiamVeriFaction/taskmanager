@@ -20,5 +20,9 @@ export class TaskComponent implements OnInit{
     this.task$ = this.taskService.getTask(this.id);
   }
 
+  click(id : number){
+    console.log(id);
+  }
+
 
 }

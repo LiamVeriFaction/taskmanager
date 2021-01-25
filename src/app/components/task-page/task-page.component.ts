@@ -1,4 +1,4 @@
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TaskListService } from 'src/app/services/task-list.service';
@@ -13,6 +13,7 @@ import { ITask } from '../../models/task.model';
 })
 export class TaskPageComponent implements OnInit {
   taskLists$!: Observable<ITaskList[]>;
+  listOrder$! : Observable<number[]>;
 
   constructor(
     private taskListService: TaskListService,
@@ -21,7 +22,16 @@ export class TaskPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.taskLists$ = this.taskListService.getTaskLists();
+    this.listOrder$ = this.taskListService.getListOrder();
   }
+
+
+  
+  drop(event: CdkDragDrop<any>, taskLists : number[]) {
+    moveItemInArray(taskLists, event.previousIndex, event.currentIndex);
+  }
+
+  
 
   taskMove(event: CdkDragDrop<number[]>) {
     if (event.container === event.previousContainer) {
@@ -48,31 +58,4 @@ export class TaskPageComponent implements OnInit {
     }
   }
 
-  /*   taskMove(event: CdkDragDrop<ITask[]>) {
-    if (event.container === event.previousContainer) {
-      this.tasklists[+event.container.id].tasks = innerMove(
-        this.tasklists[+event.container.id].tasks,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
-      //Change Tag of Task
-      this.tasklists[+event.previousContainer.id].tasks[
-        event.previousIndex
-      ].status = this.tasklists[+event.container.id].tag;
-
-      //Move Tag to new list
-      this.tasklists[+event.container.id].tasks.splice(
-        event.currentIndex,
-        0,
-        this.tasklists[+event.previousContainer.id].tasks[event.previousIndex]
-      );
-
-      //Delete Tag from old list
-      this.tasklists[+event.previousContainer.id].tasks.splice(
-        event.previousIndex,
-        1
-      );
-    }
-  } */
 }

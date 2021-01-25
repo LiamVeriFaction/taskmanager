@@ -4,15 +4,25 @@ h1{
 
 .dropzone{
   min-height: 300px;
+  margin-top: 30px;
 }
 
-.tasklist{
-  margin: 5px;
-  border-style: ridge;
-  border-color: grey;
-}
 
 .mat-raised-button {
   margin: 10px;
 
+}
+
+.addButton{
+  
+  margin-top: 10px;
+  margin-left: 60%;
+  margin-bottom: 20px;
+  border-color: rgba(240, 248, 255, 0.521);
+  color: rgba(240, 248, 255, 0.788);
+
+}
+
+.addButton:hover{
+  background-color: rgba(243, 96, 204, 0.541);
 }

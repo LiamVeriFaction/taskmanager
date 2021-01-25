@@ -11,9 +11,16 @@ import { TaskService } from './task.service';
 })
 export class TaskListService {
   private taskList = TASKLIST;
+  private listOrder = LISTORDER;
   public taskListSubject = new BehaviorSubject<ITaskList[]>(this.taskList);
+  public listOrderSubject = new BehaviorSubject<number[]>(this.listOrder);
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService) {
+  }
+
+  public getListOrder():Observable<number[]>{
+    return this.listOrderSubject.asObservable();
+  }
 
   public getTaskLists(): Observable<ITaskList[]> {
     return this.taskListSubject.asObservable();
@@ -38,6 +45,11 @@ export class TaskListService {
     );
   }
 
+  public addTask(id :number, taskID : number){
+    this.taskList[id].tasks.push(taskID);
+    this.taskListSubject.next(this.taskList);
+  }
+
   public innerMove(id: number, prevIndex: number, newIndex :number){
     this.taskList[id].tasks = innerMove(this.taskList[id].tasks,prevIndex,newIndex);
     this.taskListSubject.next(this.taskList);
@@ -60,9 +72,12 @@ function innerMove(arr: number[], oldI: number, newI: number): number[] {
 }
 
 
+const LISTORDER: number[] = [ 0, 2, 1, 3, 4]
+
 const TASKLIST: ITaskList[] = [
   { id: 0, title: 'To Do', tag: 'todo', tasks: [6, 7, 8] },
-  { id: 1, title: 'In Progess', tag: 'progress', tasks: [4, 5] },
-  { id: 2, title: 'Awaiting Review', tag: 'review', tasks: [1, 2] },
+  { id: 1, title: 'Awaiting Review', tag: 'review', tasks: [1, 2] },
+  { id: 2, title: 'In Progess', tag: 'progress', tasks: [4, 5] },
   { id: 3, title: 'Completed', tag: 'completed', tasks: [0, 3] },
+  { id: 4, title: 'Rejected', tag: 'rejected', tasks: [] },
 ];

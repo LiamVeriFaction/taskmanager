@@ -1,11 +1,11 @@
-<div cdkDropListGroup class="tasklist" *ngIf="taskList$ | async as taskList">
+<div cdkDropListGroup *ngIf="taskList$ | async as taskList">
   <h1>{{ taskList.title }}</h1>
     <div
       cdkDropList
       id="{{ taskList.id }}"
       (cdkDropListDropped)="drop($event)"
       [cdkDropListData]="taskList.tasks"
-      [cdkDropListConnectedTo]="listIDS"
+      [cdkDropListConnectedTo]=" listIDS"
       class="dropzone"
     >
       <div *ngFor="let task of taskList.tasks; index as i">
@@ -14,4 +14,6 @@
         </div>
       </div>
     </div>
+
+    <button mat-stroked-button color="primary" class="addButton" (click) = "openDialog()">Add Task</button>
   </div>

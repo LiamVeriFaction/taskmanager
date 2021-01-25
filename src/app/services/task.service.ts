@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { concatAll, filter, first, map } from 'rxjs/operators';
+import { TaskData } from '../models/task-data.model';
 import { ITask } from '../models/task.model';
+import { TaskListService } from './task-list.service';
 
 @Injectable({
   providedIn: 'root',
@@ -29,12 +31,20 @@ export class TaskService {
     );
   }
 
+  addTask(id: number, data : TaskData) : number{
+    let newTask : ITask = {id: this.tasks.length , title : data.title, description : data.description, listID : id}
+    this.tasks.push(newTask);
+    this.tasksSubject.next(this.tasks);
+    return newTask.id;
+  }
+
   reassignTask(id:number, newList:number){
     this.tasks[id].listID = newList;
     this.tasksSubject.next(this.tasks);
   }
 
 }
+
 
 const TASKS: ITask[] = [
   {
