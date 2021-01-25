@@ -10,7 +10,7 @@ import { TaskListService } from 'src/app/services/task-list.service';
 import { Observable } from 'rxjs';
 import { TaskService } from 'src/app/services/task.service';
 import { MatDialog } from '@angular/material/dialog';
-import { TaskInputBoxComponent } from '../task-input-box/task-input-box.component';
+import { TaskInputBoxComponent } from '../dialogs/task-input-box/task-input-box.component';
 
 @Component({
   selector: 'task-list',

@@ -1,20 +1,18 @@
 <div *ngIf="taskLists$ | async as taskLists">
-  <div *ngIf ="listOrder$ | async as listOrder">
-  <div
-    cdkDropList
-    cdkDropListOrientation="horizontal"
-    (cdkDropListDropped)="drop($event, listOrder)"
-    class ="taskLists"
-  >
+  <div *ngIf="listOrder$ | async as listOrder">
     <div
-      *ngFor="let listItem of listOrder"
-      cdkDrag
-      class= "taskList"
+      cdkDropList
+      cdkDropListOrientation="horizontal"
+      (cdkDropListDropped)="drop($event, listOrder)"
+      class="taskLists"
     >
-      <div>
-        <task-list [id]="listItem" (taskMove)="taskMove($event)"></task-list>
+      <div *ngFor="let listItem of listOrder" cdkDrag class="taskList">
+        <div>
+          <task-list [id]="listItem" (taskMove)="taskMove($event)"></task-list>
+        </div>
       </div>
     </div>
+
+    <button mat-stroked-button color="primary" class="addButton" (click) = "openDialog()">Add Task List</button>
   </div>
-</div>
 </div>

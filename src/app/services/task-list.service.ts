@@ -1,7 +1,9 @@
+import { TagPlaceholder } from '@angular/compiler/src/i18n/i18n_ast';
 import { mapToMapExpression } from '@angular/compiler/src/render3/util';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { concatAll, filter, find, first, map } from 'rxjs/operators';
+import { TaskListData } from '../models/task-data.model';
 import { ITaskList } from '../models/task-list.model';
 import { ITask } from '../models/task.model';
 import { TaskService } from './task.service';
@@ -61,6 +63,16 @@ export class TaskListService {
 
     this.taskListSubject.next(this.taskList);
 
+  }
+
+  public addTaskList(data : TaskListData){
+
+    let newTaskList : ITaskList = {id: this.taskList.length, title: data.title, tag: data.tag, tasks: []}
+    this.taskList.push(newTaskList);
+    this.listOrder.push(newTaskList.id);
+
+    this.taskListSubject.next(this.taskList);
+    this.listOrderSubject.next(this.listOrder);
   }
 }
 

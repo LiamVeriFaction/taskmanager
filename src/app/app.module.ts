@@ -11,9 +11,10 @@ import {MatCardModule} from '@angular/material/card';
 import {DragDropModule} from '@angular/cdk/drag-drop'
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
-import { TaskInputBoxComponent } from './components/task-input-box/task-input-box.component';
+import { TaskInputBoxComponent } from './components/dialogs/task-input-box/task-input-box.component';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { TaskListInputBoxComponent } from './components/dialogs/task-list-input-box/task-list-input-box.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FormsModule } from '@angular/forms';
     TaskComponent,
     TaskListComponent,
     TaskPageComponent,
-    TaskInputBoxComponent
+    TaskInputBoxComponent,
+    TaskListInputBoxComponent
   ],
   imports: [
     BrowserModule,

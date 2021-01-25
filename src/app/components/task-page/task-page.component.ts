@@ -1,10 +1,13 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { TaskListService } from 'src/app/services/task-list.service';
 import { TaskService } from 'src/app/services/task.service';
 import { ITaskList } from '../../models/task-list.model';
 import { ITask } from '../../models/task.model';
+import { TaskInputBoxComponent } from '../dialogs/task-input-box/task-input-box.component';
+import { TaskListInputBoxComponent } from '../dialogs/task-list-input-box/task-list-input-box.component';
 
 @Component({
   selector: 'task-page',
@@ -17,7 +20,8 @@ export class TaskPageComponent implements OnInit {
 
   constructor(
     private taskListService: TaskListService,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -56,6 +60,19 @@ export class TaskPageComponent implements OnInit {
         event.currentIndex
       );
     }
+  }
+
+  openDialog() {
+    let taskDialog = this.dialog.open(TaskListInputBoxComponent, {
+      width: '250px',
+      data: {title: '', tag: ''}
+    });
+
+    taskDialog.afterClosed().subscribe((result) => {
+      if(result){
+        this.taskListService.addTaskList(result);
+      }
+    });
   }
 
 }

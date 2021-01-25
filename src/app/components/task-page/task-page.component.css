@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: row;
   overflow: auto;
+  margin-top: 30px;
 }
 
 
@@ -19,3 +20,14 @@
   margin-bottom: 30px;
 }
 
+.addButton{
+  margin: auto;
+  margin-top: 40px;
+  border-color: rgba(240, 248, 255, 0.521);
+  color: rgba(240, 248, 255, 0.788);
+  padding: 15px;
+  font-size: 26px;
+}
+.addButton:hover{
+  background-color: rgba(243, 96, 204, 0.541);
+}
